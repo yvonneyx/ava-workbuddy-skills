@@ -18,7 +18,7 @@ examples_en:
   - Analyze this sales file and chart monthly revenue.
   - Check missing values and duplicate records and explain their impact.
   - Build an evidence-backed report, then add a regional breakdown.
-version: 1.0.1
+version: 1.0.0
 author: yvonneyx
 ---
 
