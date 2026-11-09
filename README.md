@@ -13,7 +13,7 @@ socket。先在 WorkBuddy 的命令环境执行 `ava --help`，缺少 CLI 时安
 
 ```sh
 mkdir -p dist
-zip -r dist/ava-workbuddy-1.0.0.zip ava -x '*.DS_Store'
+zip -r dist/ava-workbuddy-1.0.1.zip ava -x '*.DS_Store'
 ```
 
 包内只有一个 `ava/`
@@ -29,7 +29,9 @@ zip -r dist/ava-workbuddy-1.0.0.zip ava -x '*.DS_Store'
 - `ava/scripts/report.mjs`：查询证据记录、报告生成与追问更新；入口中声明命令及参数。
 - `ava/templates/`：报告 HTML 与配套图标；脚本按自身位置解析模板，不依赖当前工作目录。
 
-本技能版本为 1.0.0；上游固定于
+1.0.1 修复了通过符号链接路径调用报告脚本时静默退出的问题。
+
+本技能版本为 1.0.1；上游固定于
 `6e8cf0e87968022bf4ab6cc191f6ca32bd068ae8`。仅改写 WorkBuddy 入口、补充运行环境说明，并迁移模板目录及引用路径。上游 SQL、Semantic、图表协议和报告逻辑继续复用。完整来源、改动和许可证见
 [NOTICE](ava/NOTICE) 与 [LICENSE](ava/LICENSE)。
 

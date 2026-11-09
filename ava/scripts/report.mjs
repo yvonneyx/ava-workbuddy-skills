@@ -2,7 +2,7 @@
 // Report assembly; upstream attribution and MIT terms are in ../NOTICE and ../LICENSE.
 import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdir, mkdtemp, open, readFile, readdir, rm } from 'node:fs/promises';
+import { mkdir, mkdtemp, open, readFile, readdir, realpath, rm } from 'node:fs/promises';
 import { basename, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -444,7 +444,11 @@ async function main() {
   process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Node resolves module symlinks; normalize the CLI path too (e.g. macOS /tmp).
+if (
+  process.argv[1] &&
+  (await realpath(process.argv[1]).catch(() => undefined)) === fileURLToPath(import.meta.url)
+) {
   main().catch((error) => {
     process.stderr.write(`${error.message}\n`);
     process.exitCode = 1;
