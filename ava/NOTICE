@@ -1,0 +1,15 @@
+AVA for WorkBuddy 1.0.0
+
+Upstream: https://github.com/antvis/AVA/tree/ai/skills/ava
+Commit: 6e8cf0e87968022bf4ab6cc191f6ca32bd068ae8
+License: MIT; see LICENSE in this directory.
+Copyright (c) 2018-2023 AntV team
+
+WorkBuddy adaptation maintained by yvonneyx.
+Changes: rewritten SKILL.md with WorkBuddy bilingual metadata and @references
+routing; environment guidance added to references/setup.md; assets moved to
+templates with matching report.mjs and references/reports.md path changes;
+report.mjs license comment corrected to point to the bundled LICENSE.
+Other upstream reference documents, report logic, template and icon are retained.
+
+Specification: https://open.workbuddy.cn/docs/skill (checked 2026-11-09).
