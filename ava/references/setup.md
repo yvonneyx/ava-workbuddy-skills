@@ -2,24 +2,29 @@
 
 ## WorkBuddy
 
-Run environment checks in WorkBuddy's Bash tool, since its PATH may differ from an external terminal.
-Resolve the skill directory from the loaded SKILL.md, then invoke bundled scripts by absolute path.
-Use the actual attachment path and a separate task directory for output; never modify the installed skill.
-If native Windows lacks the required process/socket environment, report that limitation; this package
-does not establish native Windows support. An available Linux environment must pass the same checks.
+在 WorkBuddy 的命令环境里核对 Node.js 和 CLI。以实际落盘的附件路径运行 `ava source`，确认获得
+`datasetId`。输出写入任务目录，脚本从本次加载的 Skill 目录调用。
 
 ## CLI
 
-Use Node.js ≥22.13 on macOS or Linux and AVA CLI **4.x** (`@antv/ava`, not the `ava` test runner). Install only if a compatible CLI is unavailable:
+Use Node.js ≥22.13 and AVA CLI 4.0.2 or later. Install or update the CLI in the WorkBuddy command environment if needed:
 
 ```sh
-npm install -g @antv/ava@4
+npm install -g @antv/ava
 ```
 
 Put the compatible Node's `bin` directory on the task's `PATH` so both `node` and `ava` use it.
 
-Sessions require persistent background processes and Unix sockets. Run all calls, including cleanup, with the same user, runtime, and temporary directory. Report an environment blocker if these are unavailable.
+### PowerShell 7 (Windows)
+
+```powershell
+ava source ".\sales.csv" > session.json
+$datasetId = (Get-Content -Raw session.json | ConvertFrom-Json).datasetId
+ava schema $datasetId > schema.json
+# Inspect schema and establish Semantic before writing query.sql.
+ava query $datasetId --dsl "@query.sql" > result.json
+```
 
 ## Sessions
 
-Recover `datasetId` from saved session JSON across shell calls. Sessions expire after 30 idle minutes or disposal; reload the source, refresh schema, and reapply compatible saved semantic when access remains authorized.
+Use the same user and environment settings when accessing a session. Recover `datasetId` from saved session JSON across shell calls. Sessions expire after 30 idle minutes or disposal; reload the source, refresh schema, and reapply compatible saved semantic when access remains authorized.

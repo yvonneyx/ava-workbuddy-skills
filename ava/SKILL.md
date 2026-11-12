@@ -24,8 +24,7 @@ author: yvonneyx
 
 # AVA 数据分析
 
-在 WorkBuddy 中通过 Bash 调用 AVA CLI（`@antv/ava`
-4.x）加载数据、执行 SQL、渲染图表。由你理解问题、确认业务口径、编写 SQL 并解释结果；此流程无需额外模型 API
+在 WorkBuddy 的命令环境中调用 AVA CLI（`@antv/ava`）加载数据、执行 SQL、渲染图表。由你理解问题、确认业务口径、编写 SQL 并解释结果；此流程无需额外模型 API
 Key。按用户目标选择必要步骤，复用已有会话、定义和结果。
 
 ## 首次使用与路径
@@ -35,11 +34,10 @@ node --version
 ava --help
 ```
 
-需要 macOS 或 Linux、Node.js ≥22.13，以及可持续运行的后台进程和 Unix socket。 `ava --help` 应包含
-`source`、`schema`、`query`；缺失或不兼容时按 @references/setup.md 处理。
+需要 Node.js ≥22.13 和 AVA CLI 4.0.2 或更高版本。CLI 缺失或版本过旧时，按 @references/setup.md 安装或更新。
 
 通过本次加载的 `SKILL.md` 位置确定技能根目录，将其绝对路径赋给
-`AVA_SKILL_DIR`。脚本与模板从技能目录读取；输入文件使用 WorkBuddy 附件实际落盘的绝对路径，不猜测附件位置。会话、SQL、结果和报告写入本次任务的独立目录，不写入已安装的技能目录。后续 Bash 调用从文件恢复会话 ID，不依赖上一次 shell 的变量。
+`AVA_SKILL_DIR`。脚本与模板从技能目录读取；输入文件使用 WorkBuddy 附件实际落盘的绝对路径，不猜测附件位置。会话、SQL、结果和报告写入本次任务的独立目录，不写入已安装的技能目录。跨命令从文件恢复会话 ID。以下示例使用 Bash，PowerShell 的写法见 @references/setup.md。
 
 ## 加载数据与确认口径
 
@@ -61,7 +59,8 @@ ava schema "$DATASET_ID" > schema.json
 
 仅将已确认、可复用的变更合并到 Semantic，保留无关定义、来源和作用范围。未确认的假设、任务专用选择不写入 Semantic；尊重用户不保存的要求。
 `semantic --file`
-替换整个会话定义，先读取并合并再加载。Semantic 不会自动创建视图、计算列或执行关联，必须在 SQL 中明确实现。
+替换整个会话定义，先读取并合并再加载。新会话在首次相关查询前加载适用的已保存定义，并回读确认。
+Semantic 不会自动创建视图、计算列或执行关联，必须在 SQL 中明确实现。
 
 ## 查询与核验
 
@@ -100,7 +99,8 @@ node "$AVA_SKILL_DIR/scripts/report.mjs" render \
 `templates/icon.svg`。用户要求样式调整时，将模板复制到任务目录修改，并通过
 `--template report-template.html` 传入；保留数据绑定与唯一的 `<!-- ARTIFACT_DATA -->` 插槽。
 
-交付先说明结论、口径与限制，并给出 WorkBuddy 可打开的产物绝对路径链接。报告同时交付 HTML、配套 JSON 和证据目录，便于追问与复算。HTML 内嵌查询结果，分享时会带出这些数据；交互图表需联网从 unpkg.com 加载 GPT-Vis，正文、表格与 SQL 可离线查看。能预览时检查图表数值、单位、标签与布局；未预览则如实说明。不要把未执行的 SQL、失败的图表或未经验证的结论描述为已完成。
+按用户指定的目录、格式和精度交付，结论先行，附口径、限制和 WorkBuddy 可打开的产物链接。
+交付完整 HTML 报告时，同时提供配套 JSON 和证据目录。HTML 内嵌查询结果，分享时会带出这些数据；交互图表需联网从 unpkg.com 加载 GPT-Vis，正文、表格与 SQL 可离线查看。能预览时检查图表数值、单位、标签与布局；未预览则如实说明。不要把未执行的 SQL、失败的图表或未经验证的结论描述为已完成。
 
 ## 错误与资源
 
