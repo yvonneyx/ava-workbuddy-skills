@@ -13,7 +13,7 @@
 
 ```sh
 mkdir -p dist
-zip -r dist/ava-workbuddy-1.0.0.zip ava -x '*.DS_Store'
+zip -r dist/ava-workbuddy-1.0.1.zip ava -x '*.DS_Store'
 ```
 
 包内只有一个 `ava/`
@@ -29,7 +29,7 @@ zip -r dist/ava-workbuddy-1.0.0.zip ava -x '*.DS_Store'
 - `ava/scripts/report.mjs`：查询证据记录、报告生成与追问更新；入口中声明命令及参数。
 - `ava/templates/`：报告 HTML 与配套图标；脚本按自身位置解析模板，不依赖当前工作目录。
 
-本技能版本为 1.0.0；上游固定于
+本技能版本为 1.0.1；上游固定于
 AVA `v4.0.2`（`bc5719d8b0fc5d278981d4021d047608c89f033e`）。WorkBuddy 入口保留双语元数据，
 并同步 PowerShell 示例和 Windows 报告脚本。完整来源、改动和许可证见
 [NOTICE](ava/NOTICE) 与 [LICENSE](ava/LICENSE)。
