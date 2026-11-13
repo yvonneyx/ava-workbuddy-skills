@@ -7,11 +7,13 @@
 
 ## CLI
 
-Use Node.js ≥22.13 and AVA CLI 4.0.2 or later. Install or update the CLI in the WorkBuddy command environment if needed:
+Use Node.js ≥22.13 and AVA CLI 4.0.3 or later. Install or update the CLI in the WorkBuddy command environment if needed:
 
 ```sh
 npm install -g @antv/ava
 ```
+
+Verify `ava source --help` accepts multiple inputs and `ava viz --help` describes returning `{ chartType, config }` without `--output`. AVA 4.0.2 does not support these capabilities. If an upgrade still exposes the old help, check which `ava` executable WorkBuddy resolves on `PATH`.
 
 Put the compatible Node's `bin` directory on the task's `PATH` so both `node` and `ava` use it.
 

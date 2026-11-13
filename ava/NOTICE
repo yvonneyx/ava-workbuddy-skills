@@ -1,16 +1,17 @@
-AVA for WorkBuddy 1.0.1
+AntV Data Analysis for WorkBuddy 1.0.2
 
-Upstream: https://github.com/antvis/AVA/tree/v4.0.2/skills/ava
-Commit: bc5719d8b0fc5d278981d4021d047608c89f033e
+Upstream: https://github.com/antvis/AVA/tree/6cc78312423cdc313c6e371a5257e536049064d0/skills/ava
+Commit: 6cc78312423cdc313c6e371a5257e536049064d0
 License: MIT; see LICENSE in this directory.
 Copyright (c) 2018-2023 AntV team
 
 WorkBuddy adaptation maintained by yvonneyx.
 Changes: rewritten SKILL.md with WorkBuddy bilingual metadata and @references
-routing; environment guidance added to references/setup.md; assets moved to
+routing and AntV Data Analysis display names; CLI 4.0.3 requirements and
+environment guidance added to references/setup.md; assets moved to
 templates with matching report.mjs and references/reports.md path changes;
 report.mjs license comment corrected to point to the bundled LICENSE;
 CLI entry detection resolves symbolic links before comparing module paths.
 Other upstream reference documents, report logic, template and icon are retained.
 
-Specification: https://open.workbuddy.cn/docs/skill (checked 2026-11-09).
+Specification: https://open.workbuddy.cn/docs/skill (checked 2026-11-13).
